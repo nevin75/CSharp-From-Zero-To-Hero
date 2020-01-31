@@ -5,50 +5,45 @@
 // After that try to find every single thing that seems off.
 // Have fun! :)
 using System;
-using BootCamp.Chap;
+using BootCamp.Chapter;
 
 namespace BootCamp.Chapter
 {
-    internal class lesson3
+    public class Lesson3
     {
-        public static int demo(string count)
+        public static int demo(int count)
         {
-            int count = count;
+            int iteration = 0;
             do
             {
                 ProcPrsn();
+                iteration++;
             } while (iteration < count);
         }
 
-        private static void PrcPrsn()
+        public static void PrcPrsn()
         {
-            WriteLine("What's ya name, mate?");
-            Checks.PromptString(name);
-            WriteLine("What is your weight and height?");
-            float weightAndHeight = AsFloat();
-            WriteLine("And your age?");
-            int age = ReadMyInput();
+            Console.WriteLine("What's ya name, mate?");
+            string name = Console.Readline();
+            Console.WriteLine("What is your weight?");
+            float weight = (float)Console.Readline();
+            Console.WriteLine("What is your height?");
+            float height = (float)Console.Readline();
+            Console.WriteLine("And your age?");
+            int age = (int)Console.ReadLine();
+            calcBMI();
 
-        }
-
-        internal static int ReadMyInput()
-        {
-            return int.ReadFromConsole();
-        }
-
-        private static float AsFloat()
-        {
-            return (float)ReadMyInput();
         }
 
         private void calcBMI()
         {
-            WriteLine("Your BMI is:");
-            WriteLine(weight / height / height);
+            Console.WriteLine("Your BMI is:");
+            float bmi = weight / height / height'
+            Console.Write(bmi);
 
-            if (BMI > 40)
+            if (bmi > 40)
             {
-                WriteLine("You really shouldn't eat that much cake!");
+                WriteLine{$"{name}, you really shouldn't eat that much cake!");
                 WriteLine("No offense, mate.");
             }
         }
