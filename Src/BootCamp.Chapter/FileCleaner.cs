@@ -14,17 +14,40 @@ namespace BootCamp.Chapter
         /// <param name="cleanedFile">Cleaned up file without any "_".</param>
         public static void Clean(string dirtyFile, string cleanedFile)
         {
-            File.WriteAllText(cleanedFile, "a");
+            
+            //File.WriteAllText(cleanedFile, "a");
+            StreamWriter writer = new StreamWriter(cleanedFile, true);
+            StreamReader reader = new StreamReader(dirtyFile, true);
+
+            using (reader)
+            {
+                while (!reader.EndOfStream)
+                {
+                    char currentChar = (char)reader.Read();
+                    if (new FileInfo (dirtyFile).Length == 0)
+                    {
+                        throw new ArgumentException();
+                    }
+                    if (currentChar == '_')
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        writer.Write(currentChar);
+                    }
+                }
+            }
         }
         public static void RemoveErrantCharacter()
         {
         
-            const string newFile = @"C:\Git\CSharp-From-Zero-To-Hero\CSharp-From-Zero-To-Hero\Src\BootCamp.Chapter\Input\Balances.repaired";
+            const string cleanedFile = @"C:\Git\CSharp-From-Zero-To-Hero\CSharp-From-Zero-To-Hero\Src\BootCamp.Chapter\Input\Balances.repaired";
 
-            const string file = @"C:\Git\CSharp-From-Zero-To-Hero\CSharp-From-Zero-To-Hero\Src\BootCamp.Chapter\Input\Balances.corrupted";
+            const string dirtyFile = @"C:\Git\CSharp-From-Zero-To-Hero\CSharp-From-Zero-To-Hero\Src\BootCamp.Chapter\Input\Balances.corrupted";
 
-            StreamWriter writer = new StreamWriter(newFile, true);
-            StreamReader reader = new StreamReader(file, true);
+            StreamWriter writer = new StreamWriter(cleanedFile, true);
+            StreamReader reader = new StreamReader(dirtyFile, true);
 
             using (reader)
             {

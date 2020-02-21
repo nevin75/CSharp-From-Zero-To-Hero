@@ -11,7 +11,7 @@ namespace BootCamp.Chapter
     {
         static void Main(string[] args)
         {
-            FileCleaner.RemoveErrantCharacter();
+           // FileCleaner.RemoveErrantCharacter();
         }
     }
 }
