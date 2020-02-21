@@ -14,7 +14,12 @@ namespace BootCamp.Chapter
         /// <param name="cleanedFile">Cleaned up file without any "_".</param>
         public static void Clean(string dirtyFile, string cleanedFile)
         {
-            
+
+            if (new FileInfo(dirtyFile).Length == 0)
+            {
+                throw new ArgumentException();
+            }
+
             //File.WriteAllText(cleanedFile, "a");
             StreamWriter writer = new StreamWriter(cleanedFile, true);
             StreamReader reader = new StreamReader(dirtyFile, true);
@@ -24,10 +29,7 @@ namespace BootCamp.Chapter
                 while (!reader.EndOfStream)
                 {
                     char currentChar = (char)reader.Read();
-                    if (new FileInfo (dirtyFile).Length == 0)
-                    {
-                        throw new ArgumentException();
-                    }
+
                     if (currentChar == '_')
                     {
                         continue;
@@ -38,14 +40,18 @@ namespace BootCamp.Chapter
                     }
                 }
             }
+            ValidateCleanedData(cleanedFile);
         }
-        public static void RemoveErrantCharacter()
+        public static void ValidateCleanedData(string cleanedFile)
         {
-        
-            const string cleanedFile = @"C:\Git\CSharp-From-Zero-To-Hero\CSharp-From-Zero-To-Hero\Src\BootCamp.Chapter\Input\Balances.repaired";
 
-            const string dirtyFile = @"C:\Git\CSharp-From-Zero-To-Hero\CSharp-From-Zero-To-Hero\Src\BootCamp.Chapter\Input\Balances.corrupted";
-
+            if (!File.Exists(cleanedFile))
+            {
+                InvalidBalancesException e = null;
+                throw new InvalidBalancesException("no data in file", e);
+            }
+/*
+            //File.WriteAllText(cleanedFile, "a");
             StreamWriter writer = new StreamWriter(cleanedFile, true);
             StreamReader reader = new StreamReader(dirtyFile, true);
 
@@ -54,6 +60,7 @@ namespace BootCamp.Chapter
                 while (!reader.EndOfStream)
                 {
                     char currentChar = (char)reader.Read();
+
                     if (currentChar == '_')
                     {
                         continue;
@@ -63,8 +70,13 @@ namespace BootCamp.Chapter
                         writer.Write(currentChar);
                     }
                 }
-            }
+            }*/
         }
     }
 }
+
+
+
+
+
 
